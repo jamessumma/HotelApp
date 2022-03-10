@@ -1,8 +1,8 @@
 package com.example.hotelApp.Activities.DatabaseAccess;
 
 
-import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseController;
-import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseLogin.LoginValidation;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
 
 import android.content.Context;
 import android.content.Intent;

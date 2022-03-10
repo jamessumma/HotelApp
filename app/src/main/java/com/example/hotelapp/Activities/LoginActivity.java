@@ -6,7 +6,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hotelapp.R;
-import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
+
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 String username = usernameEditText.getText().toString();
                                                 String password = passwordEditText.getText().toString();
 
-                                                HotelLoginValidation medicalCenterLoginValidation =
-                                                        new HotelLoginValidation(databaseController, username, password);
+                                                com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation medicalCenterLoginValidation =
+                                                        new com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation(databaseController, username, password);
 
                                                 LoginValidation.performLoginValidation(medicalCenterLoginValidation, LoginActivity.this);
 

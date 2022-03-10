@@ -14,25 +14,39 @@
         android:layout_marginBottom="100dp"/>
     <EditText
         style="@style/login_editText_style"
-        android:id="@+id/usernameTextEdit"
+        android:id="@+id/username_textEdit"
         android:hint="Enter username:"
         android:inputType="textPersonName" />
     <EditText
         style="@style/login_editText_style"
-        android:id="@+id/passwordTextEdit"
-        android:hint="Enter password:"
+        android:id="@+id/passwordTextEdit1"
+        android:hint="Enter password"
         android:inputType="textPassword" />
-    <Button
-        style="@style/login_btn_style"
-        android:id="@+id/signInButton"
-        android:text="@string/sign_in_txt"/>
+    <EditText
+        style="@style/login_editText_style"
+        android:id="@+id/passwordTextEdit2"
+        android:hint="Re-enter password"
+        android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/first_name_textEdit"
+        style="@style/login_editText_style"
+        android:hint="First name"
+        android:inputType="textPersonName"/>
+    <EditText
+        android:id="@+id/last_name_textEdit"
+        style="@style/login_editText_style"
+        android:hint="Last name"
+        android:inputType="textPersonName"/>
+
+    <Spinner
+        android:id="@+id/membership_spinner"
+        style="@style/login_editText_style"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"/>
     <Button
         style="@style/login_btn_style"
         android:id="@+id/createAccountBtn"
         android:text="@string/create_account_txt"
-        android:visibility="visible"/>
-    <Button
-        style="@style/login_btn_style"
-        android:text="help"/>
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

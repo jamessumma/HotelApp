@@ -1,4 +1,4 @@
-package com.example.hotelapp.Activities.DatabaseAccess;
+package com.example.hotelApp.Activities.DatabaseAccess;
 
 
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseController;

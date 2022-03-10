@@ -1,4 +1,4 @@
-package com.example.hotelapp.Activities;
+package com.example.hotelApp.Activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;

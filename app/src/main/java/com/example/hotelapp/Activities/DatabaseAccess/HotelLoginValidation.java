@@ -5,7 +5,6 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.Databa
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
 
 import android.content.Context;
-import android.content.Intent;
 
 public class HotelLoginValidation extends LoginValidation {
 

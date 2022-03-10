@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id= "@+id/mainLayout"
     android:orientation="vertical"
-    style="@style/main_activity_style"
-    tools:context="com.example.hotelApp.Activities.LoginActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hotelapp.Activities.LoginActivity">
+
 
     <ImageView
         android:layout_width="match_parent"

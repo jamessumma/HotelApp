@@ -1,70 +1,82 @@
-package com.example.hotelApp.Activities;
-
-import android.content.Intent;
+package com.example.hotelapp.Activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.hotel_app.R;
-import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseController;
-
+import com.example.hotelapp.R;
+import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
 public class LoginActivity extends AppCompatActivity {
-
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private Button signinBtn;
-    private Button createAccountBtn;
-    private DatabaseController databaseController;
+    public EditText usernameEditText;
+    public EditText passwordEditText;
+    public Button signInButton;
+    public DatabaseController databaseController;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        /* Set the connection string to the database and the username/password, its not a good practice to hard code these in
+         * the application its better to connect to a web service to do the actual login in our behalf, otherwise a malicious
+         * user could reverse engineer the app and get much more unrestricted access to all the database server. For the time
+         * being we are doing it like this to save some time and to focus on android development rather than investing time
+         * on web programming. Those of you that want to have this in your app, I will be coordinating with you to implement
+         * this web service functionality in a way that works for your app and all others. */
+        // TODO: EDIT THIS
+        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName:MedicalCenter;instance=STEVESERVER";
+        String username = "sa";
+        String password = "mouserat";
 
         super.onCreate(savedInstanceState);
 
-        this.setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login);
 
-        this.usernameEditText = this.findViewById(R.id.usernameTextEdit);
-        this.passwordEditText = this.findViewById(R.id.passwordTextEdit);
-        this.signinBtn = this.findViewById(R.id.signInButton);
-        this.createAccountBtn = this.findViewById(R.id.createAccountBtn);
+        usernameEditText = findViewById(R.id.usernameTextEdit);
+        passwordEditText = findViewById(R.id.passwordTextEdit);
+        signInButton = findViewById(R.id.signInButton);
 
-        this.setEventHandlers();
-    }
-
-    private void setEventHandlers(){
-        if(this.createAccountBtn != null && this.signinBtn != null) {
-            this.setSignHandler();
-            this.setCreateAccountHandler();
+        //Create a new database controller object in order to connect to the database
+        databaseController = new DatabaseController(connectionString, username, password);
+        //Make sure java class implementing jdbc driver has been loaded before attempting to connect to database
+        try
+        {
+            databaseController.setDriver("net.sourceforge.jtds.jdbc.Driver");
         }
-    }
-
-    private void setSignHandler() {
-        if(this.usernameEditText != null && this.passwordEditText != null) {
-
-            this.signinBtn.setOnClickListener(
-                    new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
+        catch (ClassNotFoundException e)
+        {
+            System.out.println("Unable to load jtds driver, won't be able to connect to" +
+                    "mssql server");
         }
-    }
 
-    private void setCreateAccountHandler() {
-        this.createAccountBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(LoginActivity.this, createAccountActivity.class);
-                        LoginActivity.this.startActivity(intent);
-                    }
-                }
+        DatabaseTask connectToDBTask = new DatabaseTask.Connect(databaseController, null);
+        connectToDBTask.execute();
+
+        //Add an event handler to the button so that we login to the database when the button is clicked
+        signInButton.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+                                                String username = usernameEditText.getText().toString();
+                                                String password = passwordEditText.getText().toString();
+
+                                                HotelLoginValidation medicalCenterLoginValidation =
+                                                        new HotelLoginValidation(databaseController, username, password);
+
+                                                LoginValidation.performLoginValidation(medicalCenterLoginValidation, LoginActivity.this);
+
+                                            }
+                                        }
         );
+
+
+
     }
+
+
 
 
 }

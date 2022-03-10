@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.hotelapp.R;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private EditText username;
@@ -17,6 +18,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText reenteredPassword;
     private Spinner membershipSpinner;
     private Button createAccountBtn;
+    private DatabaseController databaseController;
 
     @Override
     protected void onCreate(Bundle resourceBundle) {
@@ -24,6 +26,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         this.setAttributes();
         this.fillSpinner();
         this.setCreateAccountBtnHandler();
+
+        final String CONNECTIONSTRING = ""; // Fill these values
+        final String USERNAME = "";
+        final String PASSWORD = "";
+
+        this.databaseController = new DatabaseController(CONNECTIONSTRING,USERNAME,PASSWORD);
     }
 
     private void setCreateAccountBtnHandler() {
@@ -32,7 +40,14 @@ public class CreateAccountActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(username != null && password != null && reenteredPassword != null && membershipSpinner != null) {
-                        // Create a new account
+                        /*
+                         Create access task to create account
+                            if account created
+                                Return to login screen
+                            else if not
+                                 display a toast explaining what went wrong
+                         */
+
                         Intent intent = new Intent(CreateAccountActivity.this,LoginActivity.class);
 
                         CreateAccountActivity.this.startActivity(intent);

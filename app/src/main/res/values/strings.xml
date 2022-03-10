@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">hotel-app</string>
+    <string name="sign_in_txt">SIGN IN</string>
+    <string name="create_account_txt">CREATE ACCOUNT</string>
 </resources>

@@ -1,15 +1,17 @@
 package com.example.hotelapp.Activities.DatabaseAccess;
 
-import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
-import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
+
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseController;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseLogin.LoginValidation;
+
 import android.content.Context;
 import android.content.Intent;
 
-public class HotelLoginValidation extends LoginValidation{
+public class HotelLoginValidation extends LoginValidation {
 
     public HotelLoginValidation(DatabaseController databaseController,
-                                        String username,
-                                        String password)
+                                String username,
+                                String password)
     {
         super(databaseController,username,password);
     }

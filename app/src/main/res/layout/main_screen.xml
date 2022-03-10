@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/main_activity_style">
+
+    <fragment
+        android:id="@+id/main_activity_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_layout"
+        style="@style/main_activity_header_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/logout_btn"
+            style="@style/main_activity_head_btn_style"
+            android:text="LOGOUT"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/check_in_btn"
+            style="@style/main_activity_head_btn_style"
+            android:layout_toRightOf="@id/logout_btn"
+            android:text="CHECK IN"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/manage_account_btn"
+            style="@style/main_activity_footer_style"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/purchases_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                style="@style/main_activity_footer_btn_style"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                style="@style/main_activity_footer_txt_style"
+                android:text="Manage Account" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/purchases_btn"
+            style="@style/main_activity_footer_style"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                style="@style/main_activity_footer_btn_style"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                style="@style/main_activity_footer_txt_style"
+                android:text="Purchases" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bookings_btn"
+            style="@style/main_activity_footer_style"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/purchases_btn"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                style="@style/main_activity_footer_btn_style"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                style="@style/main_activity_footer_txt_style"
+                android:text="Bookings" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

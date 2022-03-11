@@ -1,4 +1,4 @@
-package com.example.hotelApp.Activities;
+package com.example.hotelapp.Activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,16 +19,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        /* Set the connection string to the database and the username/password, its not a good practice to hard code these in
-         * the application its better to connect to a web service to do the actual login in our behalf, otherwise a malicious
-         * user could reverse engineer the app and get much more unrestricted access to all the database server. For the time
-         * being we are doing it like this to save some time and to focus on android development rather than investing time
-         * on web programming. Those of you that want to have this in your app, I will be coordinating with you to implement
-         * this web service functionality in a way that works for your app and all others. */
-        // TODO: EDIT THIS
-        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName:MedicalCenter;instance=STEVESERVER";
+
+        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;instance=SQLEXPRESS";
         String username = "sa";
-        String password = "mouserat";
+        String password = "password";
 
         super.onCreate(savedInstanceState);
 

@@ -1,0 +1,30 @@
+Index: app/src/main/java/com/example/hotelapp/Activities/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.hotelapp.Activities;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.example.hotelapp.R;\r\n\r\nimport com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;\r\nimport com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;\r\nimport com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;\r\npublic class LoginActivity extends AppCompatActivity {\r\n    public EditText usernameEditText;\r\n    public EditText passwordEditText;\r\n    public Button signInButton;\r\n    public DatabaseController databaseController;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState)\r\n    {\r\n        /* Set the connection string to the database and the username/password, its not a good practice to hard code these in\r\n         * the application its better to connect to a web service to do the actual login in our behalf, otherwise a malicious\r\n         * user could reverse engineer the app and get much more unrestricted access to all the database server. For the time\r\n         * being we are doing it like this to save some time and to focus on android development rather than investing time\r\n         * on web programming. Those of you that want to have this in your app, I will be coordinating with you to implement\r\n         * this web service functionality in a way that works for your app and all others. */\r\n        // TODO: EDIT THIS\r\n        String connectionString = \"jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName:MedicalCenter;instance=STEVESERVER\";\r\n        String username = \"sa\";\r\n        String password = \"mouserat\";\r\n\r\n        super.onCreate(savedInstanceState);\r\n\r\n        setContentView(R.layout.activity_login);\r\n\r\n        usernameEditText = findViewById(R.id.usernameTextEdit);\r\n        passwordEditText = findViewById(R.id.passwordTextEdit);\r\n        signInButton = findViewById(R.id.signInButton);\r\n\r\n        //Create a new database controller object in order to connect to the database\r\n        databaseController = new DatabaseController(connectionString, username, password);\r\n        //Make sure java class implementing jdbc driver has been loaded before attempting to connect to database\r\n        try\r\n        {\r\n            databaseController.setDriver(\"net.sourceforge.jtds.jdbc.Driver\");\r\n        }\r\n        catch (ClassNotFoundException e)\r\n        {\r\n            System.out.println(\"Unable to load jtds driver, won't be able to connect to\" +\r\n                    \"mssql server\");\r\n        }\r\n\r\n        DatabaseTask connectToDBTask = new DatabaseTask.Connect(databaseController, null);\r\n        connectToDBTask.execute();\r\n\r\n        //Add an event handler to the button so that we login to the database when the button is clicked\r\n        signInButton.setOnClickListener(new View.OnClickListener()\r\n                                        {\r\n                                            @Override\r\n                                            public void onClick(View view)\r\n                                            {\r\n                                                String username = usernameEditText.getText().toString();\r\n                                                String password = passwordEditText.getText().toString();\r\n\r\n                                                com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation medicalCenterLoginValidation =\r\n                                                        new com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation(databaseController, username, password);\r\n\r\n                                                LoginValidation.performLoginValidation(medicalCenterLoginValidation, LoginActivity.this);\r\n\r\n                                            }\r\n                                        }\r\n        );\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hotelapp/Activities/LoginActivity.java b/app/src/main/java/com/example/hotelapp/Activities/LoginActivity.java
+--- a/app/src/main/java/com/example/hotelapp/Activities/LoginActivity.java	(revision 3534a63b00259c6b965d615d4a51bd3b33111993)
++++ b/app/src/main/java/com/example/hotelapp/Activities/LoginActivity.java	(date 1646957471426)
+@@ -19,16 +19,10 @@
+     @Override
+     protected void onCreate(Bundle savedInstanceState)
+     {
+-        /* Set the connection string to the database and the username/password, its not a good practice to hard code these in
+-         * the application its better to connect to a web service to do the actual login in our behalf, otherwise a malicious
+-         * user could reverse engineer the app and get much more unrestricted access to all the database server. For the time
+-         * being we are doing it like this to save some time and to focus on android development rather than investing time
+-         * on web programming. Those of you that want to have this in your app, I will be coordinating with you to implement
+-         * this web service functionality in a way that works for your app and all others. */
+-        // TODO: EDIT THIS
+-        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName:MedicalCenter;instance=STEVESERVER";
++
++        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;instance=SQLEXPRESS";
+         String username = "sa";
+-        String password = "mouserat";
++        String password = "password";
+ 
+         super.onCreate(savedInstanceState);
+ 

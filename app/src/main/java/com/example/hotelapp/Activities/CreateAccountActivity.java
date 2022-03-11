@@ -1,4 +1,4 @@
-package com.example.hotelApp.Activities;
+package com.example.hotelapp.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -48,7 +48,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                  display a toast explaining what went wrong
                          */
 
-                        Intent intent = new Intent(CreateAccountActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(CreateAccountActivity.this, com.example.hotelapp.Activities.LoginActivity.class);
 
                         CreateAccountActivity.this.startActivity(intent);
                     }

@@ -1,4 +1,4 @@
-package com.example.hotelApp.Activities;
+package com.example.hotelapp.Activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +11,12 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.Databa
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
 public class LoginActivity extends AppCompatActivity {
+
     public EditText usernameEditText;
     public EditText passwordEditText;
     public Button signInButton;
+    private Button createAccountBtn;
+    private Button helpBtn;
     public DatabaseController databaseController;
 
     @Override
@@ -37,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameTextEdit);
         passwordEditText = findViewById(R.id.passwordTextEdit);
         signInButton = findViewById(R.id.signInButton);
+        createAccountBtn = findViewById(R.id.create_account_btn);
+        helpBtn = findViewById(R.id.helpBtn);
 
         //Create a new database controller object in order to connect to the database
         databaseController = new DatabaseController(connectionString, username, password);
@@ -63,10 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                                                 String username = usernameEditText.getText().toString();
                                                 String password = passwordEditText.getText().toString();
 
-                                                com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation medicalCenterLoginValidation =
-                                                        new com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation(databaseController, username, password);
+                                                com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation HotelLoginValidation =
+                                                        new com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation(databaseController, username, password);
 
-                                                LoginValidation.performLoginValidation(medicalCenterLoginValidation, LoginActivity.this);
+                                                LoginValidation.performLoginValidation(HotelLoginValidation, LoginActivity.this);
 
                                             }
                                         }

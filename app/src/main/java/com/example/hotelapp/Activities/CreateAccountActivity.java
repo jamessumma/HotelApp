@@ -1,4 +1,4 @@
-package com.example.hotelApp.Activities;
+package com.example.hotelapp.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -40,15 +40,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(username != null && password != null && reenteredPassword != null && membershipSpinner != null) {
-                        /*
-                         Create access task to create account
-                            if account created
-                                Return to login screen
-                            else if not
-                                 display a toast explaining what went wrong
-                         */
 
-                        Intent intent = new Intent(CreateAccountActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(CreateAccountActivity.this, com.example.hotelapp.Activities.LoginActivity.class);
 
                         CreateAccountActivity.this.startActivity(intent);
                     }
@@ -65,7 +58,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ResourceType")
-    private void fillSpinner(){
+    private void fillSpinner() {
         if(this.membershipSpinner != null) {
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.memberships,R.layout.create_account_activity);
             adapter.setDropDownViewResource(R.id.membership_create_account_spinner);

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.hotelapp.Activities.Fragments.ExtrasFragment;
 import com.example.hotelapp.Activities.Fragments.ManageAccountFragment;
 import com.example.hotelapp.Activities.Fragments.ManageBookingsFragment;
 import com.example.hotelapp.Activities.Fragments.PurchasesFragment;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ManageAccountFragment manageAccountFragment;
     private PurchasesFragment purchasesFragment;
     private ManageBookingsFragment manageBookingsFragment;
+    private ExtrasFragment extrasFragment;
 
     @Override
     protected void onCreate(Bundle resourceBundle) {
@@ -39,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
         ViewPager pager = this.findViewById(R.id.view_pager);
         TabLayout tableLayout = this.findViewById(R.id.tab_layout);
 
-        List<Fragment> fragments = Arrays.asList(manageAccountFragment,purchasesFragment,manageBookingsFragment);
+        List<Fragment> fragments = Arrays.asList(manageAccountFragment,purchasesFragment,extrasFragment,manageBookingsFragment);
 
-        List<String> titles = Arrays.asList("Manage Account","Purchases","Manage Bookings");
+        // I want to use R.strings.titles.
+
+        List<String> titles = Arrays.asList("Manage Account","Purchases","Extras","Manage Bookings");
 
         this.fragmentPager = new FragmentPager(pager,this.getSupportFragmentManager(),fragments,titles);
 
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         this.manageAccountFragment = new ManageAccountFragment();
         this.purchasesFragment = new PurchasesFragment();
         this.manageBookingsFragment = new ManageBookingsFragment();
+        this.extrasFragment = new ExtrasFragment();
     }
 
     @Override

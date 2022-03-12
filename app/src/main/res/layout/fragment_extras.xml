@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/fragment_style"
-    tools:context=".Activities.Fragments.PurchasesFragment">
+    tools:context=".Activities.Fragments.ExtrasFragment">
 
     <TextView
-        android:text="Purchases"
+        android:text="Extras"
         style="@style/fragment_place_holder_style"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,6 +70,11 @@
             android:text="Purchases" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/extras_tab"
+            style="@style/main_activity_footer_txt_style"
+            android:text="Extras" />
+
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/manage_books_tab"
             style="@style/main_activity_footer_txt_style"
             android:text="Manage Bookings" />

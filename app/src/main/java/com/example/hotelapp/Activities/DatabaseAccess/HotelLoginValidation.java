@@ -39,7 +39,5 @@ public class HotelLoginValidation extends LoginValidation {
 
     @Override
     public void onLoginFail(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
     }
 }

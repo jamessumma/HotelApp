@@ -49,6 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             });
         }
     }
+
     private void setAttributes() {
         this.username = this.findViewById(R.id.username_create_account_textEdit);
         this.password = this.findViewById(R.id.password_create_account_textEdit);

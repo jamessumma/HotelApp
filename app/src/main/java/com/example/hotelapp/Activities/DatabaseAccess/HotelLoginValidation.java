@@ -1,10 +1,11 @@
 package com.example.hotelapp.Activities.DatabaseAccess;
 
-
+import com.example.hotelapp.Activities.MainActivity;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
 
 import android.content.Context;
+import android.content.Intent;
 
 public class HotelLoginValidation extends LoginValidation {
 
@@ -30,18 +31,20 @@ public class HotelLoginValidation extends LoginValidation {
         return "LoginInfo";
     }
 
+    /*
     @Override
     public String getUserIdField() {
         return null;
     }
+     */
 
     @Override
     public void onLoginSuccess(Context context) {
-        //add home screen here
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
     public void onLoginFail(Context context) {
-        // add toast here
     }
 }

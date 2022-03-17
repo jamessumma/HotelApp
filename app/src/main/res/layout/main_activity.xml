@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     style="@style/main_activity_style">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/main_activity_fragment"
-        android:layout_width="match_parent"
+        style="@style/main_activity_style"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/header_layout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
@@ -21,7 +22,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="5dp">
 
         <Button
             android:id="@+id/logout_btn"
@@ -31,75 +33,63 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/check_in_btn"
+            android:id="@+id/check_in_checkout_btn"
             style="@style/main_activity_head_btn_style"
             android:layout_toRightOf="@id/logout_btn"
             android:text="CHECK IN"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/home_btn"
+            style="@style/main_activity_head_btn_style"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/check_in_checkout_btn"
+            app:layout_constraintStart_toEndOf="@+id/logout_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Home"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/footer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        style="@style/main_activity_footer_style"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/manage_account_tab"
+            style="@style/main_activity_footer_txt_style"
+            android:text="Manage Account" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/purchases_tab"
+            style="@style/main_activity_footer_txt_style"
+            android:text="Purchases" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/extras_tab"
+            style="@style/main_activity_footer_txt_style"
+            android:text="Extras" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/manage_books_tab"
+            style="@style/main_activity_footer_txt_style"
+            android:text="Manage Bookings" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toTopOf="@+id/tab_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_layout">
 
-        <LinearLayout
-            android:id="@+id/manage_account_btn"
-            style="@style/main_activity_footer_style"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/purchases_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                style="@style/main_activity_footer_btn_style"
-                android:src="@drawable/ic_launcher_foreground" />
-
-            <TextView
-                style="@style/main_activity_footer_txt_style"
-                android:text="Manage Account" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/purchases_btn"
-            style="@style/main_activity_footer_style"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                style="@style/main_activity_footer_btn_style"
-                android:src="@drawable/ic_launcher_foreground" />
-
-            <TextView
-                style="@style/main_activity_footer_txt_style"
-                android:text="Purchases" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bookings_btn"
-            style="@style/main_activity_footer_style"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/purchases_btn"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                style="@style/main_activity_footer_btn_style"
-                android:src="@drawable/ic_launcher_foreground" />
-
-            <TextView
-                style="@style/main_activity_footer_txt_style"
-                android:text="Bookings" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

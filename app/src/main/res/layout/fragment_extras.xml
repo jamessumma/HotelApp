@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fragment_style"
+    tools:context=".Activities.Fragments.ExtrasFragment">
+
+    <TextView
+        android:text="Extras"
+        style="@style/fragment_place_holder_style"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

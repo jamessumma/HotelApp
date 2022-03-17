@@ -11,9 +11,12 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.Databa
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseLogin.LoginValidation;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
 public class LoginActivity extends AppCompatActivity {
+
     public EditText usernameEditText;
     public EditText passwordEditText;
     public Button signInButton;
+    private Button createAccountBtn;
+    private Button helpBtn;
     public DatabaseController databaseController;
 
     @Override
@@ -31,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameTextEdit);
         passwordEditText = findViewById(R.id.passwordTextEdit);
         signInButton = findViewById(R.id.signInButton);
+        createAccountBtn = findViewById(R.id.create_account_btn);
+        helpBtn = findViewById(R.id.helpBtn);
 
         //Create a new database controller object in order to connect to the database
         databaseController = new DatabaseController(connectionString, username, password);
@@ -56,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                                             {
                                                 String username = usernameEditText.getText().toString();
                                                 String password = passwordEditText.getText().toString();
+
 
                                                 com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation hotelLoginValidation =
                                                         new com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation(databaseController, username, password);

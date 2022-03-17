@@ -40,13 +40,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(username != null && password != null && reenteredPassword != null && membershipSpinner != null) {
-                        /*
-                         Create access task to create account
-                            if account created
-                                Return to login screen
-                            else if not
-                                 display a toast explaining what went wrong
-                         */
 
                         Intent intent = new Intent(CreateAccountActivity.this, com.example.hotelapp.Activities.LoginActivity.class);
 
@@ -56,6 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             });
         }
     }
+
     private void setAttributes() {
         this.username = this.findViewById(R.id.username_create_account_textEdit);
         this.password = this.findViewById(R.id.password_create_account_textEdit);
@@ -65,7 +59,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ResourceType")
-    private void fillSpinner(){
+    private void fillSpinner() {
         if(this.membershipSpinner != null) {
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.memberships,R.layout.create_account_activity);
             adapter.setDropDownViewResource(R.id.membership_create_account_spinner);

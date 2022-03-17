@@ -4,7 +4,7 @@
     android:id= "@+id/mainLayout"
     android:orientation="vertical"
     style="@style/main_activity_style"
-    tools:context="com.example.hotelApp.Activities.createAccountActivity">
+    tools:context="com.example.hotelapp.Activities.CreateAccountActivity">
 
     <ImageView
         android:layout_width="match_parent"

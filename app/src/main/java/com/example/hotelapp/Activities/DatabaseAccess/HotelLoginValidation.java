@@ -1,4 +1,4 @@
-package com.example.hotelApp.Activities.DatabaseAccess;
+package com.example.hotelapp.Activities.DatabaseAccess;
 
 
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
@@ -28,6 +28,11 @@ public class HotelLoginValidation extends LoginValidation {
     @Override
     public String getLoginTable() {
         return "LoginInfo";
+    }
+
+    @Override
+    public String getUserIdField() {
+        return null;
     }
 
     @Override

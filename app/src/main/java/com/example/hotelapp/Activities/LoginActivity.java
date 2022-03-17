@@ -57,10 +57,10 @@ public class LoginActivity extends AppCompatActivity {
                                                 String username = usernameEditText.getText().toString();
                                                 String password = passwordEditText.getText().toString();
 
-                                                com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation medicalCenterLoginValidation =
-                                                        new com.example.hotelApp.Activities.DatabaseAccess.HotelLoginValidation(databaseController, username, password);
+                                                com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation hotelLoginValidation =
+                                                        new com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation(databaseController, username, password);
 
-                                                LoginValidation.performLoginValidation(medicalCenterLoginValidation, LoginActivity.this);
+                                                LoginValidation.performLoginValidation(hotelLoginValidation, LoginActivity.this);
 
                                             }
                                         }

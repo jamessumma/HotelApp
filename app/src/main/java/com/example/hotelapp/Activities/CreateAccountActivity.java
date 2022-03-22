@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guest;
 import com.example.hotelapp.R;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 
@@ -22,6 +24,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle resourceBundle) {
+
         super.onCreate(resourceBundle);
         this.setAttributes();
         this.fillSpinner();

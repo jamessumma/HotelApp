@@ -31,7 +31,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         final String USERNAME = "";
         final String PASSWORD = "";
 
-        this.databaseController = new DatabaseController(CONNECTIONSTRING,USERNAME,PASSWORD);
+        this.databaseController = DatabaseController.createDatabaseController(CONNECTIONSTRING,USERNAME,PASSWORD);
     }
 
     private void setCreateAccountBtnHandler() {

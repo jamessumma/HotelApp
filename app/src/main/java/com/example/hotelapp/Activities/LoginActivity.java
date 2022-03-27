@@ -15,13 +15,6 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.Databa
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
 public class LoginActivity extends AppCompatActivity {
 
-    public EditText usernameEditText;
-    public EditText passwordEditText;
-    public Button signInButton;
-    private Button createAccountBtn;
-    private Button helpBtn;
-    public DatabaseController databaseController;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,16 +25,18 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+        this.getSupportActionBar().hide();
+
         setContentView(R.layout.activity_login);
 
-        usernameEditText = findViewById(R.id.usernameTextEdit);
-        passwordEditText = findViewById(R.id.passwordTextEdit);
-        signInButton = findViewById(R.id.signInButton);
-        createAccountBtn = findViewById(R.id.create_account_btn);
-        helpBtn = findViewById(R.id.helpBtn);
+        EditText usernameEditText = findViewById(R.id.usernameTextEdit);
+        EditText passwordEditText = findViewById(R.id.passwordTextEdit);
+        Button signInButton = findViewById(R.id.signInButton);
+        Button createAccountBtn = findViewById(R.id.create_account_btn);
+        Button helpBtn = findViewById(R.id.helpBtn);
 
         //Create a new database controller object in order to connect to the database
-        databaseController = DatabaseController.createDatabaseController(connectionString, username, password);
+        DatabaseController databaseController = DatabaseController.createDatabaseController(connectionString, username, password);
         //Make sure java class implementing jdbc driver has been loaded before attempting to connect to database
         try
         {
@@ -64,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     HotelLoginValidation hotelLoginValidation =
-                            new HotelLoginValidation(databaseController, username1, password1);
+                            new HotelLoginValidation(DatabaseController.getDatabaseController(), username1, password1);
 
                     LoginValidation.performLoginValidation(hotelLoginValidation, LoginActivity.this);
 

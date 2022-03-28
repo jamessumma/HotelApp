@@ -53,8 +53,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                     guestFields.add("password");
                     guestFields.add("membershipType");
                     ArrayList<String> guestValues = new ArrayList<>();
-                    guestValues.add(username.toString());
-                    guestValues.add(password.toString());
+                    guestValues.add(username.getText().toString());
+                    guestValues.add(password.getText().toString());
                     guestValues.add(membershipSpinner.toString());
                     DatabaseTask insertAccountTask = new DatabaseTask.Insert(databaseController, databaseTable,
                                                                             databaseTable.getRetrievalField(),

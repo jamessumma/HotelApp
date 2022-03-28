@@ -25,7 +25,7 @@ public class TransactionItem extends DatabaseTableRecord {
 
     @Override
     public String getDetailedInfo() {
-        return null;
+        return this.itemName + "\t" + this.itemPrice + "\tx" + this.quantity;
     }
 
     @Override

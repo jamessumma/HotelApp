@@ -46,7 +46,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private void setCreateAccountBtnHandler() {
         if(this.createAccountBtn != null){
             this.createAccountBtn.setOnClickListener(view -> {
-                if(username != null && password != null && reenteredPassword != null && membershipSpinner != null) {
+                if(username != null && password != null && membershipSpinner != null && password.equals(reenteredPassword)) {
 
                     ArrayList<String> guestFields = new ArrayList<>();
                     guestFields.add("username");
@@ -57,7 +57,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     guestValues.add(password.toString());
                     guestValues.add(membershipSpinner.toString());
                     DatabaseTask insertAccountTask = new DatabaseTask.Insert(databaseController, databaseTable,
-                                                                            username.toString(), username.toString(),
+                                                                            databaseTable.getRetrievalField(),
                                                                             guestFields, guestValues);
                     insertAccountTask.execute();
 

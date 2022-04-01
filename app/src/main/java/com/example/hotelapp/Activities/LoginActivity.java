@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             System.out.println("Unable to load jtds driver, won't be able to connect to" +
                     "mssql server");
+            System.exit(-1);
         }
 
         DatabaseTask connectToDBTask = new DatabaseTask.Connect(databaseController);

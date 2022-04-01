@@ -45,5 +45,6 @@ public class HotelLoginValidation extends LoginValidation {
 
     @Override
     public void onLoginFail(Context context) {
+        //TODO
     }
 }

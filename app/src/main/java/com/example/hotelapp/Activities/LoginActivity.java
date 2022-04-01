@@ -23,13 +23,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
 
-        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;instance=SQLEXPRESS";
+        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;";
         String username = "sa";
-        String password = "password";
+        String password = "mouserat";
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_login);
+        this.setContentView(R.layout.activity_login);
 
         usernameEditText = findViewById(R.id.usernameTextEdit);
         passwordEditText = findViewById(R.id.passwordTextEdit);
@@ -38,7 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         helpBtn = findViewById(R.id.helpBtn);
 
         //Create a new database controller object in order to connect to the database
-        databaseController = new DatabaseController(connectionString, username, password);
+        databaseController = DatabaseController.createDatabaseController(connectionString,username,password);
+
         //Make sure java class implementing jdbc driver has been loaded before attempting to connect to database
         try
         {
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                     "mssql server");
         }
 
-        DatabaseTask connectToDBTask = new DatabaseTask.Connect(databaseController, null);
+        DatabaseTask connectToDBTask = new DatabaseTask.Connect(databaseController);
         connectToDBTask.execute();
 
         //Add an event handler to the button so that we login to the database when the button is clicked

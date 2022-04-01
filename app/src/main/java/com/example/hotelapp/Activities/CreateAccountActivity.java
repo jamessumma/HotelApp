@@ -15,6 +15,7 @@ import com.example.hotelapp.R;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 
 public class CreateAccountActivity extends AppCompatActivity {
+
     private EditText username;
     private EditText password;
     private EditText reenteredPassword;
@@ -34,11 +35,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         final String USERNAME = "";
         final String PASSWORD = "";
 
-        this.databaseController = new DatabaseController(CONNECTIONSTRING,USERNAME,PASSWORD);
+       // this.databaseController = new DatabaseController(CONNECTIONSTRING,USERNAME,PASSWORD);
     }
 
     private void setCreateAccountBtnHandler() {
-        if(this.createAccountBtn != null){
+        if(this.createAccountBtn != null) {
             this.createAccountBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -64,8 +65,12 @@ public class CreateAccountActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     private void fillSpinner() {
         if(this.membershipSpinner != null) {
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.memberships,R.layout.create_account_activity);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+
+                    this,R.array.memberships,R.layout.create_account_activity);
+
             adapter.setDropDownViewResource(R.id.membership_create_account_spinner);
+
             this.membershipSpinner.setAdapter(adapter);
         }
     }

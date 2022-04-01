@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         List<Fragment> fragments = Arrays.asList(manageAccountFragment,purchasesFragment,extrasFragment,manageBookingsFragment);
 
-        // I want to use R.strings.titles.
-
         List<String> titles = Arrays.asList("Manage Account","Purchases","Extras","Manage Bookings");
 
         this.fragmentPager = new FragmentPager(pager,this.getSupportFragmentManager(),fragments,titles);
@@ -95,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
         else {
-
             this.fragmentPager.setCurrentFragmentPosition(fragmentPager.getCurrentFragmentPosition() - 1);
         }
     }

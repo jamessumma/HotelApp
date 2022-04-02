@@ -33,9 +33,8 @@ public class HotelLoginValidation extends LoginValidation {
 
     @Override
     public String getUserIdField() {
-        return null;
+        return "guestID";
     }
-
 
     @Override
     public void onLoginSuccess(Context context) {

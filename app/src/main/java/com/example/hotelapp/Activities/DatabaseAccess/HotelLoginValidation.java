@@ -31,12 +31,10 @@ public class HotelLoginValidation extends LoginValidation {
         return "LoginInfo";
     }
 
-    /*
     @Override
     public String getUserIdField() {
         return null;
     }
-     */
 
     @Override
     public void onLoginSuccess(Context context) {

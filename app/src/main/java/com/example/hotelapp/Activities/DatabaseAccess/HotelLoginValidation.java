@@ -18,7 +18,7 @@ public class HotelLoginValidation extends LoginValidation {
 
     @Override
     public String getUsernameField() {
-        return "username";
+        return "userName";
     }
 
     @Override
@@ -28,12 +28,12 @@ public class HotelLoginValidation extends LoginValidation {
 
     @Override
     public String getLoginTable() {
-        return "LoginInfo";
+        return "guests";
     }
 
     @Override
     public String getUserIdField() {
-        return null;
+        return "guestID";
     }
 
     @Override
@@ -44,5 +44,6 @@ public class HotelLoginValidation extends LoginValidation {
 
     @Override
     public void onLoginFail(Context context) {
+        //TODO
     }
 }

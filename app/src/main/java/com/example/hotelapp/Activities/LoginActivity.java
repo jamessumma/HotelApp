@@ -19,24 +19,25 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
 
-        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel";
+        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;";
         String username = "sa";
-        String password = "password";
+        String password = "Nomeg1996!";
 
         super.onCreate(savedInstanceState);
 
-        this.getSupportActionBar().hide();
-
         setContentView(R.layout.activity_login);
+
+        this.getSupportActionBar().hide();
 
         EditText usernameEditText = findViewById(R.id.usernameTextEdit);
         EditText passwordEditText = findViewById(R.id.passwordTextEdit);
         Button signInButton = findViewById(R.id.signInButton);
-        Button createAccountBtn = findViewById(R.id.create_account_btn);
+        Button createAccountBtn = findViewById(R.id.createAccountBtn);
         Button helpBtn = findViewById(R.id.helpBtn);
 
         //Create a new database controller object in order to connect to the database
         DatabaseController databaseController = DatabaseController.createDatabaseController(connectionString, username, password);
+
         //Make sure java class implementing jdbc driver has been loaded before attempting to connect to database
         try
         {
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             System.out.println("Unable to load jtds driver, won't be able to connect to" +
                     "mssql server");
+            System.exit(-1);
         }
 
         DatabaseTask connectToDBTask = new DatabaseTask.Connect(databaseController);

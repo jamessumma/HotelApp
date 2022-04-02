@@ -20,6 +20,7 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.Databas
 import java.util.ArrayList;
 
 public class CreateAccountActivity extends AppCompatActivity {
+
     private EditText username;
     private EditText password;
     private EditText reenteredPassword;
@@ -37,13 +38,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         this.setCreateAccountBtnHandler();
 
         databaseController = DatabaseController.getDatabaseController();
-        /*
-        final String CONNECTIONSTRING = ""; // Fill these values
-        final String USERNAME = "";
-        final String PASSWORD = "";
-
-        this.databaseController = DatabaseController.createDatabaseController(CONNECTIONSTRING,USERNAME,PASSWORD);
-         */
     }
 
     private void setCreateAccountBtnHandler() {
@@ -52,9 +46,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if(username != null && password != null && membershipSpinner != null && password.equals(reenteredPassword)) {
 
                     ArrayList<String> guestFields = new ArrayList<>();
-                    guestFields.add("username");
+                    guestFields.add("userName");
                     guestFields.add("password");
-                    guestFields.add("membershipType");
+                    guestFields.add("memberShipID");
                     ArrayList<String> guestValues = new ArrayList<>();
                     guestValues.add(username.getText().toString());
                     guestValues.add(password.getText().toString());
@@ -84,8 +78,12 @@ public class CreateAccountActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     private void fillSpinner() {
         if(this.membershipSpinner != null) {
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.memberships,R.layout.create_account_activity);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+
+                    this,R.array.memberships,R.layout.create_account_activity);
+
             adapter.setDropDownViewResource(R.id.membership_create_account_spinner);
+
             this.membershipSpinner.setAdapter(adapter);
         }
     }

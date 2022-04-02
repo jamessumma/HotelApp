@@ -53,6 +53,36 @@ public class Booking extends DatabaseTableRecord {
 
     @Override
     public String getFieldValue(String fieldName) {
-        return null;
+        String value;
+        switch (fieldName){
+            case "bookingID":
+                value = String.valueOf(bookingID);
+                break;
+            case "name":
+                value = this.guestFirstName + " " + this.guestLastName;
+                break;
+            case "roomNumber":
+                value = String.valueOf(this.roomNumber);
+                break;
+            case "floor":
+                value = String.valueOf(this.floorNumber);
+                break;
+            case "roomType":
+                value = this.roomType;
+                break;
+            case "date":
+                value = String.valueOf(this.startDate);
+                break;
+            case "duration":
+                value = String.valueOf(this.duration);
+                break;
+            case "price":
+                value = String.valueOf(this.price);
+                break;
+            default:
+                value = "";
+                break;
+        }
+        return value;
     }
 }

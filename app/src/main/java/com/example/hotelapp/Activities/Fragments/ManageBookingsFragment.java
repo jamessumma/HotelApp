@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Bookings.Booking;
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Bookings.Bookings;
+import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
 import com.example.hotelapp.R;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
@@ -43,7 +44,7 @@ public class ManageBookingsFragment extends DynamicFragment {
             RecyclerView recyclerView = this.fragmentView.findViewById(R.id.recyclerView);
 
             this.dataListView = new DataListView(recyclerView, new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false), this.bookings);
-            this.dataListView.setRetrievalValue("1");
+            this.dataListView.setRetrievalValue(HotelLoginValidation.getUserId());
             this.dataListView.setItemLayoutId(R.layout.booking_layout);
             this.dataListView.setDataItemToViewRenderer((view, dataItem) -> transferBookingData(view, (Booking)dataItem));
             registerDynamicComponent(this.dataListView);

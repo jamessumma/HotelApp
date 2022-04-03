@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;";
         String username = "sa";
-        String password = "Nomeg1996!";
+        String password = "mouserat";
 
         super.onCreate(savedInstanceState);
 

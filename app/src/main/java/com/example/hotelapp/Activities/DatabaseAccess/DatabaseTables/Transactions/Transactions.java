@@ -1,11 +1,15 @@
 package com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions;
 
+import android.net.TrafficStats;
+
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guests;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.QueryResults;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTable;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 
 public class Transactions extends DatabaseTable {
     public Transactions(DatabaseController databaseController) {
@@ -24,17 +28,35 @@ public class Transactions extends DatabaseTable {
     }
 
     @Override
-    public boolean retrieve(String retrievalValue){
+    public boolean retrieve(String retrievalValue) {
+
         Guests guests = new Guests(this.databaseController);
-        joinWithTable(guests, "guestID");
+
+        TransactionItems transactionItems = new TransactionItems(this.databaseController);
+
+        this.joinWithTable(guests, "guestID");
+
+        this.joinWithTable(transactionItems, "transactionID");
+
         boolean success = super.retrieve(retrievalValue);
-        disjoin();
+
+        this.disjoin();
+
         return success;
     }
 
     @Override
     protected boolean addCurrentResult(QueryResults results) throws SQLException {
-        return false;
+
+        int transactionID = results.getInt("transactionID");
+        int guestID = results.getInt("guestID");
+        Date date = results.getDate("transactionDate");
+
+        Transaction transaction = new Transaction(transactionID,guestID,date);
+
+        this.getRecordArray().add(transaction);
+
+        return true;
     }
 
 }

@@ -3,11 +3,13 @@ package com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Products;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTableRecord;
 
 public class Product extends DatabaseTableRecord {
+
     private int productID;
     private String productName;
     private double productPrice;
     private String productDescription;
     private String productType;
+
     public Product(int productID, String productName, double productPrice, String productDescription, String productType){
         this.productID = productID;
         this.productName = productName;
@@ -15,6 +17,7 @@ public class Product extends DatabaseTableRecord {
         this.productDescription = productDescription;
         this.productType = productType;
     }
+
     @Override
     public int getRecordId() {
         return this.productID;

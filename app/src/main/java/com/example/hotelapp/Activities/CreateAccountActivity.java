@@ -36,7 +36,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         this.setAttributes();
         this.fillSpinner();
         this.setCreateAccountBtnHandler();
-
+        this.setContentView(R.layout.create_account_activity);
         databaseController = DatabaseController.getDatabaseController();
     }
 

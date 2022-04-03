@@ -17,7 +17,7 @@ import java.util.Date;
 public class Bookings extends DatabaseTable {
     public Bookings(DatabaseController databaseController) {
         super(databaseController);
-        setRetrievalField(this.getPrimaryKey());
+        this.setRetrievalField("guestID");
     }
 
     @Override

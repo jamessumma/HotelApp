@@ -1,5 +1,8 @@
 package com.example.hotelapp.Activities.Fragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Bookings.Booking;
@@ -17,10 +21,14 @@ import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
 import com.example.hotelapp.R;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
+import com.example.myandroidsupportlibrary.DrawableSupport.DrawableFactory;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataListView.DataListView;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
+import java.util.Locale;
 
 
 public class ManageBookingsFragment extends DynamicFragment {
@@ -39,6 +47,7 @@ public class ManageBookingsFragment extends DynamicFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         super.onCreateView(inflater, container, savedInstanceState);
         super.onCreate(savedInstanceState);
+        this.fragmentView.setBackgroundResource(R.drawable.hotel_booking_bg);
 
         if(this.dataListView == null){
             RecyclerView recyclerView = this.fragmentView.findViewById(R.id.recyclerView);
@@ -51,7 +60,7 @@ public class ManageBookingsFragment extends DynamicFragment {
             this.dataListView.setRequiresUpdate(true);
             refresh(true);
         }
-        return null;
+        return this.fragmentView;
     }
 
     private boolean transferBookingData(View view, Booking booking){
@@ -61,12 +70,14 @@ public class ManageBookingsFragment extends DynamicFragment {
             TextView floorNumber = view.findViewById(R.id.floorNumber);
             TextView roomType = view.findViewById(R.id.roomType);
             TextView date = view.findViewById(R.id.date);
-            Date startDate = new Date(booking.getFieldValue("startDate"));
+            TextView duration = view.findViewById(R.id.duration);
 
-            roomNumber.append(booking.getFieldValue("roomNumber"));
-            floorNumber.append(booking.getFieldValue("floor"));
-            roomType.append(booking.getFieldValue("roomType"));
-            date.append(startDate.toString());
+            roomNumber.setText("Room Number: " + booking.getFieldValue("roomNumber"));
+            floorNumber.setText("Floor: " + booking.getFieldValue("floor"));
+            roomType.setText("Room Type: " + booking.getFieldValue("roomType"));
+            date.setText("Date: " + booking.getFieldValue("date"));
+            duration.setText("Duration: " + booking.getFieldValue("duration"));
+
             success = true;
         }
         return success;

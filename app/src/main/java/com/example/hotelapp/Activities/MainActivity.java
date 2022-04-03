@@ -2,6 +2,7 @@ package com.example.hotelapp.Activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         this.setAttributes();
         this.setHandlers();
         this.setContentView(R.layout.main_activity);
+        this.getSupportActionBar().hide();
 
         ViewPager pager = this.findViewById(R.id.view_pager);
         TabLayout tableLayout = this.findViewById(R.id.tab_layout);

@@ -19,9 +19,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
 
-        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;";
+        String connectionString = "jdbc:jtds:sqlserver://10.0.2.2:1433;databaseName=hotel;instance=SQLEXPRESS";
         String username = "sa";
-        String password = "mouserat";
+        String password = "password";
 
         super.onCreate(savedInstanceState);
 

@@ -3,64 +3,77 @@ package com.example.hotelapp.Activities.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Bookings.Booking;
+import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Bookings.Bookings;
+import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
 import com.example.hotelapp.R;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataListView.DataListView;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ManageBookingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ManageBookingsFragment extends Fragment {
+import java.util.Date;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class ManageBookingsFragment extends DynamicFragment {
 
-    public ManageBookingsFragment() {
-        // Required empty public constructor
-    }
+    private Bookings bookings;
+    private DataListView dataListView;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ManageBookingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ManageBookingsFragment newInstance(String param1, String param2) {
-        ManageBookingsFragment fragment = new ManageBookingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public ManageBookingsFragment(){
+        super();
+        this.bookings = new Bookings(DatabaseTask.getDatabaseController());
+        this.bookings.setAssociatedFragment(this);
+        this.dataListView = null;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        super.onCreateView(inflater, container, savedInstanceState);
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        if(this.dataListView == null){
+            RecyclerView recyclerView = this.fragmentView.findViewById(R.id.recyclerView);
+
+            this.dataListView = new DataListView(recyclerView, new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false), this.bookings);
+            this.dataListView.setRetrievalValue(HotelLoginValidation.getUserId());
+            this.dataListView.setItemLayoutId(R.layout.booking_layout);
+            this.dataListView.setDataItemToViewRenderer((view, dataItem) -> transferBookingData(view, (Booking)dataItem));
+            registerDynamicComponent(this.dataListView);
+            this.dataListView.setRequiresUpdate(true);
+            refresh(true);
         }
+        return null;
+    }
+
+    private boolean transferBookingData(View view, Booking booking){
+        boolean success = false;
+        if(booking != null){
+            TextView roomNumber = view.findViewById(R.id.roomNumber);
+            TextView floorNumber = view.findViewById(R.id.floorNumber);
+            TextView roomType = view.findViewById(R.id.roomType);
+            TextView date = view.findViewById(R.id.date);
+            Date startDate = new Date(booking.getFieldValue("startDate"));
+
+            roomNumber.append(booking.getFieldValue("roomNumber"));
+            floorNumber.append(booking.getFieldValue("floor"));
+            roomType.append(booking.getFieldValue("roomType"));
+            date.append(startDate.toString());
+            success = true;
+        }
+        return success;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage_bookings, container, false);
+    public int getLayoutResourceId() {
+        return R.layout.fragment_manage_bookings;
     }
 }

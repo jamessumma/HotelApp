@@ -1,16 +1,14 @@
 package com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions;
 
-
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guests;
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Products.Products;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
-import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.QueryResults;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTable;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Transactions extends DatabaseTable {
     public Transactions(DatabaseController databaseController) {
@@ -25,46 +23,36 @@ public class Transactions extends DatabaseTable {
 
     @Override
     public String getPrimaryKey() {
-        return "guestID";
+        return "transactionID";
     }
 
     @Override
-    public boolean retrieve(String retrievalValue) {
-        boolean success = false;
-
-        TransactionItems transactionItems = new TransactionItems(DatabaseTask.getDatabaseController());
-
-        Products products = new Products(DatabaseTask.getDatabaseController());
-
-        transactionItems.joinWithTable(products,"productID");
-
-        this.joinWithTable(transactionItems,"transactionID");
-
-        success = super.retrieve(retrievalValue);
-
-        transactionItems.disjoin();
+    public boolean retrieve(String retrievalValue){
+        Guests guests = new Guests(this.databaseController);
+        TransactionItems transactionItems = new TransactionItems(this.databaseController);
+        Products products = new Products(this.databaseController);
+        joinWithTable(guests, "guestID");
+        joinWithTable(transactionItems, "transactionID");
+        transactionItems.joinWithTable(products, "productID");
+        boolean success = super.retrieve(retrievalValue);
         disjoin();
-
         return success;
     }
 
     @Override
     protected boolean addCurrentResult(QueryResults results) throws SQLException {
-
-         int transactionItemID = results.getInt("transactionItemID");
-         int transactionID = results.getInt("transactionID");
-         Date date = results.getDate("transactionDate");
-         int quantity = results.getInt("quantity");
-         int productID = results.getInt("productID");
-         String productName = results.getString("productName");
-         double productPrice = results.getDouble("productPrice");
-         int guestID = results.getInt("guestID");
-
-         Transaction transaction = new Transaction(transactionItemID,transactionID,guestID,date,quantity,productID,productName,productPrice);
-
-         this.getRecordArray().add(transaction);
-
-         return true;
+        int transactionID = results.getInt("transactionID");
+        Date date = results.getDate("transactionDate");
+        String userName = results.getString("userName");
+        String name = results.getString("firstName") + " " + results.getString("lastName");
+        ArrayList<TransactionItem> items = new ArrayList<>();
+        do{
+            String itemName = results.getString("productName");
+            double price = results.getDouble("productPrice");
+            int quantity = results.getInt("quantity");
+            items.add(new TransactionItem(itemName, price, quantity));
+        }while(results.next());
+        Transaction transaction = new Transaction(transactionID, userName, name, date, items);
+        return this.getRecordArray().add(transaction);
     }
-
 }

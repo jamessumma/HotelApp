@@ -1,35 +1,24 @@
 package com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions;
 
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTableRecord;
-import com.example.myandroidsupportlibrary.MetricConversionSupport.MetricConversion;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Transaction extends DatabaseTableRecord {
 
-    private int transactionItemID;
     private int transactionID;
-    private String date;
-    private int quantity;
-    private int productID;
-    private String productName;
-    private double productPrice;
-    private int guestID;
+    private String guestUserName;
+    private String guestName;
+    private Date transactionDate;
+    private ArrayList<TransactionItem> items;
 
-    //private ArrayList<TransactionItem> items; Talk to kevin about it.
-
-    private final static String DATE_FORMAT = "EEE dd, MMM yyyy";
-
-    public Transaction(int transactionItemID, int transactionID, int guestID, Date date, int quantity, int productID, String productName, double productPrice) {
-        this.transactionItemID = transactionItemID;
+    public Transaction(int transactionID, String guestUserName, String guestName, Date transactionDate, ArrayList<TransactionItem> items){
         this.transactionID = transactionID;
-        this.guestID = guestID;
-        this.date = MetricConversion.convertDateToFormattedString(date,DATE_FORMAT);
-        this.quantity = quantity;
-        this.productID = productID;
-        this.productName = productName;
-        this.productPrice = productPrice;
+        this.guestUserName = guestUserName;
+        this.guestName = guestName;
+        this.transactionDate = transactionDate;
+        this.items = items;
     }
 
     @Override
@@ -39,57 +28,25 @@ public class Transaction extends DatabaseTableRecord {
 
     @Override
     public String getAbbreviatedInfo() {
-        return "Transaction number " + this.transactionID + "\n" +
-                "Guest ID " + this.guestID + "\n" +
-                "Date Purchased " + this.date + "\n";
+        return null;
     }
 
     @Override
     public String getDetailedInfo() {
-        return "Transaction number " + this.transactionID + "\n" +
-                "Guest ID " + this.guestID + "\n" +
-                "Date Purchased " + this.date + "\n";
+        String info = "Transaction number: " + this.transactionID +
+                "\nUsername: " + this.guestUserName +
+                "\nGuest Name: " + this.guestName +
+                "\nDate: " + this.transactionDate;
+        for(TransactionItem i : this.items){
+            info += "\n" + i.getDetailedInfo();
+        }
+        return info;
     }
 
     @Override
     public String getFieldValue(String fieldName) {
-
-        String result = "";
-
-        switch (fieldName) {
-            case "transactionItemID": {
-                result = String.valueOf(this.transactionItemID);
-                break;
-            }
-            case "transactionID": {
-                result = String.valueOf(this.transactionID);
-                break;
-            }
-            case "transactionDate": {
-                result = this.date;
-                break;
-            }
-            case "quantity": {
-                result = String.valueOf(this.quantity);
-                break;
-            }
-            case "productID": {
-                result = String.valueOf(this.productID);
-                break;
-            }
-            case "productName": {
-                result = productName;
-                break;
-            }
-            case "productPrice": {
-                result = String.valueOf(this.productPrice);
-                break;
-            }
-            case "guestID": {
-                result = String.valueOf(this.guestID);
-                break;
-            }
-        }
-        return result;
+        return null;
     }
+
+    public ArrayList<TransactionItem> getItems(){return this.items; }
 }

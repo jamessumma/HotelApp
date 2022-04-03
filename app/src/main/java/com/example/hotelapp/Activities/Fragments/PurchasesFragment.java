@@ -26,14 +26,14 @@ import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment;
 
 public class PurchasesFragment extends DynamicFragment {
 
-    private TransactionItems transactionItems;
+    private Transactions transactions;
 
     private DataListView dataListView;
 
     public PurchasesFragment() {
         super();
-        this.transactionItems = new TransactionItems(DatabaseTask.getDatabaseController());
-        transactionItems.setAssociatedFragment(this);
+        this.transactions = new Transactions(DatabaseTask.getDatabaseController());
+        transactions.setAssociatedFragment(this);
         dataListView = null;
     }
 
@@ -46,7 +46,7 @@ public class PurchasesFragment extends DynamicFragment {
 
             RecyclerView recyclerView = this.fragmentView.findViewById(R.id.purchaseHistoryRecyclerView);
 
-            dataListView = new DataListView(recyclerView, new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL, false), transactionItems);
+            dataListView = new DataListView(recyclerView, new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL, false), transactions);
 
             dataListView.setRetrievalValue(HotelLoginValidation.getUserId());
 
@@ -55,7 +55,7 @@ public class PurchasesFragment extends DynamicFragment {
             dataListView.setDataItemToViewRenderer(new DataItemToView() {
                 @Override
                 public boolean transferItemData(View view, DatabaseTableRecord dataItem) {
-                    return PurchasesFragment.this.transferTransactionItem(view,(TransactionItem) dataItem);
+                    return PurchasesFragment.this.transferTransactionItem(view,(Transaction) dataItem);
                 }
             });
 
@@ -69,7 +69,7 @@ public class PurchasesFragment extends DynamicFragment {
         return fragmentView;
     }
 
-    private boolean transferTransactionItem(View view, TransactionItem transactionItem) {
+    private boolean transferTransactionItem(View view, Transaction transactionItem) {
         boolean success = false;
         if(transactionItem != null) {
             TextView purchaseDateTextView = view.findViewById(R.id.purchase_date);

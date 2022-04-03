@@ -13,20 +13,14 @@ public class TransactionItem extends DatabaseTableRecord {
     private double itemPrice;
     private int quantity;
      */
-
     private int transactionItemID;
     private int transactionID;
-    private String date;
-    private int quantity;
     private int productID;
-    private String productName;
-    private double productPrice;
-    private int guestID;
+    private int quantity;
 
     private final static String DATE_FORMAT = "EEE dd, MMM yyyy";
 
-    public TransactionItem(int transactionItemID, int transactionID, Date date, int quantity,
-                           int productID, String productName, double productPrice, int guestID) {
+    public TransactionItem(int transactionItemID, int transactionID, int productID, int quantity) {
 
         /** Kevin need input from, he smart, he know best
         this.itemName = itemName;
@@ -36,17 +30,13 @@ public class TransactionItem extends DatabaseTableRecord {
 
         this.transactionItemID = transactionItemID;
         this.transactionID = transactionID;
-        this.date = MetricConversion.convertDateToFormattedString(date,DATE_FORMAT);
         this.quantity = quantity;
         this.productID = productID;
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.guestID = guestID;
     }
 
     @Override
     public int getRecordId() {
-        return transactionItemID;
+        return this.transactionItemID;
     }
 
     @Override
@@ -77,28 +67,12 @@ public class TransactionItem extends DatabaseTableRecord {
                 result = String.valueOf(this.transactionID);
                 break;
             }
-            case "transactionDate": {
-                result = this.date;
-                break;
-            }
             case "quantity": {
                 result = String.valueOf(this.quantity);
                 break;
             }
             case "productID": {
                 result = String.valueOf(this.productID);
-                break;
-            }
-            case "productName": {
-                result = productName;
-                break;
-            }
-            case "productPrice": {
-                result = String.valueOf(this.productPrice);
-                break;
-            }
-            case "guestID": {
-                result = String.valueOf(this.guestID);
                 break;
             }
         }

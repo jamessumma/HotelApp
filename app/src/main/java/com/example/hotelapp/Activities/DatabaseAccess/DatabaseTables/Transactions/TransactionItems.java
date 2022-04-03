@@ -31,23 +31,7 @@ public class TransactionItems extends DatabaseTable {
 
         boolean success = false;
 
-        Products products = new Products(this.databaseController);
-
-        Guests guests = new Guests(this.databaseController);
-
-        Transactions transactions = new Transactions(this.databaseController);
-
-        transactions.joinWithTable(guests,"guestID");
-
-        this.joinWithTable(products,"productID");
-
-        this.joinWithTable(transactions,"transactionID");
-
         success = super.retrieve(retrievalValue);
-
-        transactions.disjoin();
-
-        disjoin();
 
         return success;
     }
@@ -57,16 +41,11 @@ public class TransactionItems extends DatabaseTable {
 
         int transactionItemID = results.getInt("transactionItemID");
         int transactionID = results.getInt("transactionID");
-        Date date = results.getDate("transactionDate");
         int quantity = results.getInt("quantity");
         int productID = results.getInt("productID");
-        String productName = results.getString("productName");
-        double productPrice = results.getDouble("productPrice");
-        int guestID = results.getInt("guestID");
 
+        TransactionItem transactionItem = new TransactionItem(transactionItemID,transactionID,productID,quantity);
 
-        TransactionItem transactionItem = new TransactionItem(transactionItemID,transactionID,date,quantity,
-                                                                productID,productName,productPrice,guestID);
         this.getRecordArray().add(transactionItem);
 
         return true;

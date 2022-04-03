@@ -1,9 +1,10 @@
 package com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions;
 
-import android.net.TrafficStats;
 
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guests;
+import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Products.Products;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.QueryResults;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTable;
 
@@ -24,23 +25,25 @@ public class Transactions extends DatabaseTable {
 
     @Override
     public String getPrimaryKey() {
-        return "transactionID";
+        return "guestID";
     }
 
     @Override
     public boolean retrieve(String retrievalValue) {
+        boolean success = false;
 
-        Guests guests = new Guests(this.databaseController);
+        TransactionItems transactionItems = new TransactionItems(DatabaseTask.getDatabaseController());
 
-        TransactionItems transactionItems = new TransactionItems(this.databaseController);
+        Products products = new Products(DatabaseTask.getDatabaseController());
 
-        this.joinWithTable(guests, "guestID");
+        transactionItems.joinWithTable(products,"productID");
 
-        this.joinWithTable(transactionItems, "transactionID");
+        this.joinWithTable(transactionItems,"transactionID");
 
-        boolean success = super.retrieve(retrievalValue);
+        success = super.retrieve(retrievalValue);
 
-        this.disjoin();
+        transactionItems.disjoin();
+        disjoin();
 
         return success;
     }
@@ -48,15 +51,20 @@ public class Transactions extends DatabaseTable {
     @Override
     protected boolean addCurrentResult(QueryResults results) throws SQLException {
 
-        int transactionID = results.getInt("transactionID");
-        int guestID = results.getInt("guestID");
-        Date date = results.getDate("transactionDate");
+         int transactionItemID = results.getInt("transactionItemID");
+         int transactionID = results.getInt("transactionID");
+         Date date = results.getDate("transactionDate");
+         int quantity = results.getInt("quantity");
+         int productID = results.getInt("productID");
+         String productName = results.getString("productName");
+         double productPrice = results.getDouble("productPrice");
+         int guestID = results.getInt("guestID");
 
-        Transaction transaction = new Transaction(transactionID,guestID,date);
+         Transaction transaction = new Transaction(transactionItemID,transactionID,guestID,date,quantity,productID,productName,productPrice);
 
-        this.getRecordArray().add(transaction);
+         this.getRecordArray().add(transaction);
 
-        return true;
+         return true;
     }
 
 }

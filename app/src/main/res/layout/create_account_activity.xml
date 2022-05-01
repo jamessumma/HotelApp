@@ -42,6 +42,7 @@
         android:id="@+id/membership_create_account_spinner"
         style="@style/login_editText_style"
         android:spinnerMode="dropdown"
+        android:entries="@array/memberships"
         android:textAlignment="center"/>
     <Button
         style="@style/login_btn_style"

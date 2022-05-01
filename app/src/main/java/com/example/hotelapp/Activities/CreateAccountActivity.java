@@ -87,9 +87,4 @@ public class CreateAccountActivity extends AppCompatActivity {
             this.membershipSpinner.setAdapter(adapter);
         }
     }
-
-
-
-
-
 }

@@ -1,10 +1,12 @@
 package com.example.hotelapp.Activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -13,7 +15,9 @@ import com.example.hotelapp.Activities.Fragments.ManageAccountFragment;
 import com.example.hotelapp.Activities.Fragments.ManageBookingsFragment;
 import com.example.hotelapp.Activities.Fragments.PurchasesFragment;
 import com.example.hotelapp.R;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment.DynamicToolbar;
 import com.example.myandroidsupportlibrary.LayoutSupport.FragmentPager;
+import com.example.myandroidsupportlibrary.ToolbarSupport.ToolbarFormatter;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Arrays;
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         this.fragmentPager = new FragmentPager(pager,this.getSupportFragmentManager(),fragments,titles);
 
         this.fragmentPager.bind(tableLayout);
-
     }
 
     private void setCheckInCheckOutHandler() {
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         this.checkInCheckOutBtn = this.findViewById(R.id.check_in_checkout_btn);
         this.manageAccountFragment = new ManageAccountFragment();
         this.purchasesFragment = new PurchasesFragment();
-        this.manageBookingsFragment = new ManageBookingsFragment();
+        this.manageBookingsFragment = new ManageBookingsFragment(this);
         this.extrasFragment = new ExtrasFragment();
     }
 

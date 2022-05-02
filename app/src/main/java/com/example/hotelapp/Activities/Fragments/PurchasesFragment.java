@@ -22,7 +22,7 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.Databa
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTableRecord;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataItemToView;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataListView.DataListView;
-import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment.DynamicFragment;
 
 public class PurchasesFragment extends DynamicFragment {
 

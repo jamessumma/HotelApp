@@ -3,64 +3,136 @@ package com.example.hotelapp.Activities.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guest;
+import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guests;
+import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
 import com.example.hotelapp.R;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTable;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTableRecord;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataItemToView;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataItemView;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DynamicComponent;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment.DynamicFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ManageAccountFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ManageAccountFragment extends Fragment {
+import java.util.ArrayList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class ManageAccountFragment extends DynamicFragment implements View.OnClickListener {
 
-    public ManageAccountFragment() {
-        // Required empty public constructor
+    private Guests guests;
+    private DataItemView guestInfoView;
+    private Button editContactInfo;
+    //retrieve items method,
+    public ManageAccountFragment()
+    {
+        super();
+        guests = new Guests(DatabaseController.getDatabaseController());
+        guests.setAssociatedFragment(this);
+        guests.setRetrievalField("guestID");
+        //this.editContactInfo = this.getView().findViewById(R.id.editInfoBtn);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ManageAccountFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ManageAccountFragment newInstance(String param1, String param2) {
-        ManageAccountFragment fragment = new ManageAccountFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+    public DatabaseTable getDatabaseTable(){
+        return guests;
+    }
+
+    protected boolean transferData(View view,
+                                   DatabaseTableRecord databaseTableRecord)
+    {
+        return transferGuestData(view,
+                (Guest)databaseTableRecord);
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        initializeGuestInfoView();
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public int getLayoutResourceId() {
+        return R.layout.fragment_manage_account;
+    }
+
+    private void initializeGuestInfoView()
+    {
+        if (guestInfoView == null){
+            guestInfoView = new DataItemView(guests);
+            guestInfoView.setXmlViewId(R.id.mainAccountLayout);
+            guestInfoView.setRetrievalValue(HotelLoginValidation.getUserId());
+            DataItemView dataItemView = new DataItemView(guests);
+
+            guestInfoView.setDataItemToViewRenderer( new DataItemToView()
+            {
+                @Override
+                public boolean transferItemData(View view, DatabaseTableRecord dataItem)
+                {
+                    return transferGuestData(view, (Guest) dataItem);
+                }
+            });
+            registerDynamicComponent(guestInfoView);
+            guestInfoView.setRequiresUpdate(true);
+            refresh(true);
         }
+
+    }
+    private boolean transferGuestData(View view, Guest guest)
+    {
+        boolean success = false;
+
+        if (guest != null )
+        {
+            System.out.println("Loading account info");
+            TextView nameTextView = view.findViewById(R.id.nameTextView);
+            TextView usernameTextView = view.findViewById(R.id.usernameTextView);
+            TextView emailTextView = view.findViewById(R.id.emailTextView);
+            TextView dobTextView = view.findViewById(R.id.dobTextView);
+            this.editContactInfo = this.getView().findViewById(R.id.editInfoBtn);
+
+
+
+            nameTextView.setText(guest.getFieldValue("fullname"));
+            emailTextView.setText(guest.getFieldValue("email"));
+            dobTextView.setText(guest.getFieldValue("dob"));
+            usernameTextView.setText(guest.getFieldValue("username"));
+
+
+
+
+            success = true;
+        }
+        return success;
+    }
+    @Override
+    public void updateComponents(DatabaseTable updatedTable) {
+        super.updateComponents(updatedTable);
+        if (guestInfoView != null){
+            guestInfoView.setCurItem(0);
+        }
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage_account, container, false);
+    public void onClick(View view) {
+        System.out.println("button");
+        if  (view == editContactInfo)
+        {
+            System.out.println("button clicked");
+            //Intent myIntent = new Intent(this, PatientOptionsActivity.class);
+            //this.startActivity(myIntent);
+        }
     }
 }

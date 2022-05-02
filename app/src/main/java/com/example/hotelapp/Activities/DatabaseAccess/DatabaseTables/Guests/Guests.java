@@ -42,6 +42,7 @@ public class Guests extends DatabaseTable {
         String lastName = results.getString("lastName");
         Date dateOfBirth = results.getDate("dateOfBirth");
         String password = results.getString("password");
+        String emailAddress = results.getString("emailAddress");
 
         int membershipID = results.getInt("membershipID");
         String membershipType = results.getString("membershipType");
@@ -57,7 +58,8 @@ public class Guests extends DatabaseTable {
                 lastName,
                 dateOfBirth,
                 password,
-                membership
+                membership,
+                emailAddress
         );
         return this.getRecordArray().add(guest);
     }

@@ -1,5 +1,6 @@
 package com.example.hotelapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +19,11 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FragmentPager fragmentPager;
     private Button logoutBtn;
+    private Button editContactInfo;
     private Button checkInCheckOutBtn;
     private ManageAccountFragment manageAccountFragment;
     private PurchasesFragment purchasesFragment;
@@ -31,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle resourceBundle) {
         super.onCreate(resourceBundle);
+        this.setContentView(R.layout.main_activity);
         this.setAttributes();
         this.setHandlers();
-        this.setContentView(R.layout.main_activity);
 
         ViewPager pager = this.findViewById(R.id.view_pager);
         TabLayout tableLayout = this.findViewById(R.id.tab_layout);
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         this.fragmentPager.bind(tableLayout);
 
+        //setOnClickListener
+
     }
 
     private void setCheckInCheckOutHandler() {
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            System.out.println("checkin clicked");
                             //TODO add some stuff
                         }
                     }
@@ -67,7 +72,22 @@ public class MainActivity extends AppCompatActivity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            System.out.println("logout clicked");
                             //TODO add some stuff
+                        }
+                    }
+            );
+        }
+    }
+    private void setEditHandler() {
+        System.out.println("hit here ");
+        if(this.editContactInfo != null) {
+            this.editContactInfo.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            System.out.println("button clicked");
+                            setContentView(R.layout.edit_contact_dialog);
                         }
                     }
             );
@@ -75,11 +95,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setHandlers(){
         this.setLogoutHandler();
+        this.setEditHandler();
         this.setCheckInCheckOutHandler();
     }
 
     private void setAttributes() {
         this.logoutBtn = this.findViewById(R.id.logout_btn);
+        this.editContactInfo = this.findViewById(R.id.editInfoBtn);
         this.checkInCheckOutBtn = this.findViewById(R.id.check_in_checkout_btn);
         this.manageAccountFragment = new ManageAccountFragment();
         this.purchasesFragment = new PurchasesFragment();
@@ -96,4 +118,15 @@ public class MainActivity extends AppCompatActivity {
             this.fragmentPager.setCurrentFragmentPosition(fragmentPager.getCurrentFragmentPosition() - 1);
         }
     }
+
+    @Override
+    public void onClick(View view) {
+        if  (view == editContactInfo)
+        {
+            System.out.println("button clicked");
+            //Intent myIntent = new Intent(this, PatientOptionsActivity.class);
+            //this.startActivity(myIntent);
+        }
+    }
+
 }

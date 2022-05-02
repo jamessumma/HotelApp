@@ -9,12 +9,13 @@ public class Guest extends DatabaseTableRecord {
     private int guestID;
     private String userName;
     private String firstName;
+    private String emailAddress;
     private String lastName;
     private Date dateOfBirth;
     private String password;
     private Membership membership;
 
-    public Guest(int guestID, String userName, String firstName, String lastName, Date dateOfBirth, String password, Membership membership){
+    public Guest(int guestID, String userName, String firstName, String lastName, Date dateOfBirth, String password, Membership membership, String emailAddress){
         this.guestID = guestID;
         this.userName = userName;
         this.firstName = firstName;
@@ -22,6 +23,7 @@ public class Guest extends DatabaseTableRecord {
         this.dateOfBirth = dateOfBirth;
         this.password = password;
         this.membership = membership;
+        this.emailAddress = emailAddress;
     }
 
     @Override
@@ -44,10 +46,43 @@ public class Guest extends DatabaseTableRecord {
     }
 
     @Override
-    public String getFieldValue(String fieldName) {
-        return null;
-    }
+    public String getFieldValue(String fieldName)
+    {
+        String fieldValue = "";
+        switch (fieldName)
+        {
+            case "guestid":
+                fieldValue = String.valueOf(guestID);
+                break;
+            case "firstname":
+                fieldValue = firstName;
+                break;
+            case "fullname":
+                fieldValue = firstName;
+                fieldValue += " ";
+                fieldValue += lastName;
+                break;
+            case "dob":
+                fieldValue = String.valueOf(dateOfBirth);
+                break;
+            case "username":
+                fieldValue = String.valueOf(userName);
+                break;
+            case "password":
+                fieldValue = String.valueOf(password);
+                break;
+            case "membership":
+                fieldValue = String.valueOf(membership);
+                break;
+            case "email":
+                fieldValue = emailAddress;
+                break;
 
+            case "test":
+                return "test";
+        }
+        return fieldValue;
+    }
     public String getUserName(){return this.userName;}
     public String getFirstName(){return this.firstName;}
     public String getLastName(){return this.lastName;}

@@ -46,11 +46,6 @@ public class CreateBookingActivity extends AppCompatActivity {
         this.databaseController = DatabaseController.getDatabaseController();
         this.setContentView(R.layout.activity_create_booking);
         this.setAttributes();
-        this.datePicker = this.findViewById(R.id.datePicker);
-        this.numberPicker = this.findViewById(R.id.numberPicker);
-        this.addBookingButton = this.findViewById(R.id.addBookingButton);
-        this.cancelBookingButton = this.findViewById(R.id.cancelBookingButton);
-        this.cancelBookingButton.setMinimumWidth(this.addBookingButton.getMeasuredWidth());
         this.bookings = new Bookings(DatabaseController.getDatabaseController());
         this.setAddBookingButtonHandler();
         this.setCancelBookingButtonHandler();
@@ -97,6 +92,8 @@ public class CreateBookingActivity extends AppCompatActivity {
         this.roomTypeSpinner = this.findViewById(R.id.roomTypeSpinner);
         this.numberPicker.setMinValue(1);
         this.numberPicker.setMaxValue(21);
-        datePicker.setMinDate(System.currentTimeMillis() - 1000);
+        this.datePicker.setMinDate(System.currentTimeMillis() - 1000); // prevent user from picking a date in the past
+        this.cancelBookingButton = this.findViewById(R.id.cancelBookingButton);
+        this.cancelBookingButton.setMinimumWidth(this.addBookingButton.getMeasuredWidth());
     }
 }

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.hotelapp.Activities.Fragments.ExtrasFragment;
@@ -34,6 +35,16 @@ public class MainActivity extends AppCompatActivity {
         this.setAttributes();
         this.setHandlers();
         this.setContentView(R.layout.main_activity);
+
+        manageAccountFragment = new ManageAccountFragment();
+        purchasesFragment = new PurchasesFragment();
+        extrasFragment = new ExtrasFragment();
+        manageBookingsFragment = new ManageBookingsFragment();
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.attach(manageAccountFragment)
+                .attach(purchasesFragment).attach(extrasFragment).
+                attach(manageBookingsFragment).commit();
 
         ViewPager pager = this.findViewById(R.id.view_pager);
         TabLayout tableLayout = this.findViewById(R.id.tab_layout);

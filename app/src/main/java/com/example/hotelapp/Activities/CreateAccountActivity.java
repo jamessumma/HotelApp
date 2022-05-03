@@ -12,16 +12,21 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guest;
+import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Guests.Guests;
 import com.example.hotelapp.R;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseController;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.DatabaseTasks.DatabaseTask;
+import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.QueryResults;
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTable;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText username;
+    private EditText firstName;
+    private EditText lastName;
     private EditText password;
     private EditText reenteredPassword;
     private Spinner membershipSpinner;
@@ -45,26 +50,64 @@ public class CreateAccountActivity extends AppCompatActivity {
             this.createAccountBtn.setOnClickListener(view -> {
                 if(username != null && password != null && membershipSpinner != null && password.equals(reenteredPassword)) {
 
-                    ArrayList<String> guestFields = new ArrayList<>();
-                    guestFields.add("userName");
-                    guestFields.add("password");
-                    guestFields.add("memberShipID");
-                    ArrayList<String> guestValues = new ArrayList<>();
-                    guestValues.add(username.getText().toString());
-                    guestValues.add(password.getText().toString());
-                    guestValues.add(membershipSpinner.toString());
-                    DatabaseTask insertAccountTask = new DatabaseTask.Insert(databaseController, databaseTable,
-                                                                            databaseTable.getRetrievalField(),
-                                                                            guestFields, guestValues);
-                    insertAccountTask.execute();
+                    /*Guests guests = new Guests(databaseController);
+                    guests.setRetrievalField("userName");
+                    DatabaseTask retrieveUsername = new DatabaseTask.Retrieve(databaseController, guests,
+                            username.getText().toString());
+                    retrieveUsername.execute();*/
 
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, MainActivity.class);
+                    if (validateUsername()) {
 
-                    context.startActivity(intent);
+                        ArrayList<String> guestFields = new ArrayList<>();
+
+                        guestFields.add("userName");
+                        guestFields.add("firstName");
+                        guestFields.add("lastName");
+                        guestFields.add("password");
+                        guestFields.add("memberShipID");
+                        ArrayList<String> guestValues = new ArrayList<>();
+                        guestValues.add(username.getText().toString());
+                        guestValues.add(firstName.getText().toString());
+                        guestValues.add(lastName.getText().toString());
+                        guestValues.add(password.getText().toString());
+                        guestValues.add(membershipSpinner.toString());
+                        DatabaseTask insertAccountTask = new DatabaseTask.Insert(databaseController, databaseTable,
+                                databaseTable.getRetrievalField(),
+                                guestFields, guestValues);
+                        insertAccountTask.execute();
+
+                        Context context = view.getContext();
+                        Intent intent = new Intent(context, MainActivity.class);
+
+                        context.startActivity(intent);
+                    }
                 }
             });
         }
+    }
+
+    private boolean validateUsername() {
+        boolean success = false;
+        String query = "select userName from guestTable where userName = '" + username + "'";
+
+        try
+        {
+            QueryResults results = databaseController.executeResultsQuery(query);
+
+            if (results.next())
+            {
+                String userName = results.getString(1);
+                if (!userName.isEmpty())
+                    success = true;
+            }
+            databaseController.closeResultSet(results);
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return success;
     }
 
     private void setAttributes() {

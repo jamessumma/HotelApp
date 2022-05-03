@@ -22,7 +22,7 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.Databa
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTableRecord;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataItemToView;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataListView.DataListView;
-import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment.DynamicFragment;
 
 public class PurchasesFragment extends DynamicFragment {
 
@@ -46,18 +46,13 @@ public class PurchasesFragment extends DynamicFragment {
 
             RecyclerView recyclerView = this.fragmentView.findViewById(R.id.purchaseHistoryRecyclerView);
 
-            dataListView = new DataListView(recyclerView, new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL, false), transactions);
+            dataListView = new DataListView(recyclerView, new LinearLayoutManager(this.fragmentView.getContext(),LinearLayoutManager.VERTICAL, false), transactions);
 
             dataListView.setRetrievalValue(HotelLoginValidation.getUserId());
 
             dataListView.setItemLayoutId(R.layout.purchases_layout);
 
-            dataListView.setDataItemToViewRenderer(new DataItemToView() {
-                @Override
-                public boolean transferItemData(View view, DatabaseTableRecord dataItem) {
-                    return PurchasesFragment.this.transferTransactionItem(view,(Transaction) dataItem);
-                }
-            });
+            dataListView.setDataItemToViewRenderer((view, dataItem) -> PurchasesFragment.this.transferTransactionItem(view,(Transaction) dataItem));
 
             registerDynamicComponent(dataListView);
 

@@ -19,11 +19,10 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private FragmentPager fragmentPager;
     private Button logoutBtn;
-    private Button editContactInfo;
     private Button checkInCheckOutBtn;
     private ManageAccountFragment manageAccountFragment;
     private PurchasesFragment purchasesFragment;
@@ -47,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.fragmentPager = new FragmentPager(pager,this.getSupportFragmentManager(),fragments,titles);
 
         this.fragmentPager.bind(tableLayout);
-
-        //setOnClickListener
 
     }
 
@@ -79,31 +76,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             );
         }
     }
-    private void setEditHandler() {
-        System.out.println("hit here ");
-        if(this.editContactInfo != null) {
-            this.editContactInfo.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            System.out.println("button clicked");
-                            setContentView(R.layout.edit_contact_dialog);
-                        }
-                    }
-            );
-        }
-    }
+
     private void setHandlers(){
         this.setLogoutHandler();
-        this.setEditHandler();
         this.setCheckInCheckOutHandler();
     }
 
     private void setAttributes() {
         this.logoutBtn = this.findViewById(R.id.logout_btn);
-        this.editContactInfo = this.findViewById(R.id.editInfoBtn);
-        this.checkInCheckOutBtn = this.findViewById(R.id.check_in_checkout_btn);
         this.manageAccountFragment = new ManageAccountFragment();
+        this.checkInCheckOutBtn = this.findViewById(R.id.check_in_checkout_btn);
+
         this.purchasesFragment = new PurchasesFragment();
         this.manageBookingsFragment = new ManageBookingsFragment();
         this.extrasFragment = new ExtrasFragment();
@@ -116,16 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else {
             this.fragmentPager.setCurrentFragmentPosition(fragmentPager.getCurrentFragmentPosition() - 1);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if  (view == editContactInfo)
-        {
-            System.out.println("button clicked");
-            //Intent myIntent = new Intent(this, PatientOptionsActivity.class);
-            //this.startActivity(myIntent);
         }
     }
 

@@ -27,11 +27,12 @@ import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment.Dynam
 import java.util.ArrayList;
 
 
-public class ManageAccountFragment extends DynamicFragment implements View.OnClickListener {
+public class ManageAccountFragment extends DynamicFragment {
 
     private Guests guests;
     private DataItemView guestInfoView;
     private Button editContactInfo;
+    private String pk;
     //retrieve items method,
     public ManageAccountFragment()
     {
@@ -39,7 +40,7 @@ public class ManageAccountFragment extends DynamicFragment implements View.OnCli
         guests = new Guests(DatabaseController.getDatabaseController());
         guests.setAssociatedFragment(this);
         guests.setRetrievalField("guestID");
-        //this.editContactInfo = this.getView().findViewById(R.id.editInfoBtn);
+        //DatabaseTask.Update update = new DatabaseTask.Update();
     }
 
 
@@ -57,9 +58,26 @@ public class ManageAccountFragment extends DynamicFragment implements View.OnCli
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         initializeGuestInfoView();
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        v.findViewById(R.id.editInfoBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("button clicked");
+                ArrayList<String> updateFields = new ArrayList<>();
+                updateFields.add("emailAddress");
+                ArrayList<String> updateValues = new ArrayList<>();
+                updateValues.add("newestEmail@example.com");
+                ArrayList<String> keyFields = new ArrayList<>();
+                keyFields.add("guestID");
+                ArrayList<String> keyValues = new ArrayList<>();
+                keyValues.add(guests.getPrimaryKey());
+
+                updateItems(guests, "", updateFields, updateValues, keyFields, keyValues);
+                //DatabaseTask.Update update = new DatabaseTask.Update(DatabaseController.getDatabaseController(), guests, guests.getRetrievalField(), updateFields, keyFields, keyValues );
+            }
+        });
+        return v;
     }
 
     @Override
@@ -102,15 +120,10 @@ public class ManageAccountFragment extends DynamicFragment implements View.OnCli
             TextView dobTextView = view.findViewById(R.id.dobTextView);
             this.editContactInfo = this.getView().findViewById(R.id.editInfoBtn);
 
-
-
             nameTextView.setText(guest.getFieldValue("fullname"));
             emailTextView.setText(guest.getFieldValue("email"));
             dobTextView.setText(guest.getFieldValue("dob"));
             usernameTextView.setText(guest.getFieldValue("username"));
-
-
-
 
             success = true;
         }
@@ -125,14 +138,4 @@ public class ManageAccountFragment extends DynamicFragment implements View.OnCli
 
     }
 
-    @Override
-    public void onClick(View view) {
-        System.out.println("button");
-        if  (view == editContactInfo)
-        {
-            System.out.println("button clicked");
-            //Intent myIntent = new Intent(this, PatientOptionsActivity.class);
-            //this.startActivity(myIntent);
-        }
-    }
 }

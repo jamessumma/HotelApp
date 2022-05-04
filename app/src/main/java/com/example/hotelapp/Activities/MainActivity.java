@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             System.out.println("logout clicked");
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            MainActivity.this.startActivity(intent);
                             //TODO add some stuff
                         }
                     }

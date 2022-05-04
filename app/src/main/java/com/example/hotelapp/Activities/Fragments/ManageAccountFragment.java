@@ -74,7 +74,7 @@ public class ManageAccountFragment extends DynamicFragment {
                 keyValues.add(guests.getPrimaryKey());
 
                 updateItems(guests, "", updateFields, updateValues, keyFields, keyValues);
-                //DatabaseTask.Update update = new DatabaseTask.Update(DatabaseController.getDatabaseController(), guests, guests.getRetrievalField(), updateFields, keyFields, keyValues );
+
             }
         });
         return v;

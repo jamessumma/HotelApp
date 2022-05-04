@@ -62,7 +62,7 @@
     <TextView
         android:id="@+id/addressTitleTextView"
         android:layout_width="120dp"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:text="Email:"
         android:textColor="#000000"
@@ -72,13 +72,14 @@
 
     <TextView
         android:id="@+id/emailTextView"
-        android:layout_width="180dp"
-        android:layout_height="80dp"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
         android:text=""
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/addressTitleTextView"
-        app:layout_constraintTop_toBottomOf="@id/nameTitleTextView" />
+        android:layout_marginLeft="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressTitleTextView" />
 
     <TextView
         android:id="@+id/dobTitleTextView"
@@ -89,7 +90,7 @@
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addressTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@id/emailTextView" />
 
     <TextView
         android:id="@+id/dobTextView"
@@ -99,7 +100,7 @@
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/dobTitleTextView"
-        app:layout_constraintTop_toBottomOf="@id/addressTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@id/emailTextView" />
 
 
     <TextView

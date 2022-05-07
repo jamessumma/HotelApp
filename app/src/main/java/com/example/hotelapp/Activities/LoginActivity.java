@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         Button createAccountBtn = findViewById(R.id.createAccountBtn);
         Button helpBtn = findViewById(R.id.helpBtn);
 
+        this.getSupportActionBar().hide();
+
         //Create a new database controller object in order to connect to the database
         DatabaseController databaseController = DatabaseController.createDatabaseController(connectionString, username, password);
 

@@ -10,11 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Products.Product;
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Products.Products;
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.Transaction;
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.TransactionItem;
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.TransactionItems;
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.Transactions;
 import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
 import com.example.hotelapp.R;
@@ -34,6 +30,7 @@ public class PurchasesFragment extends DynamicFragment {
         super();
         this.transactions = new Transactions(DatabaseTask.getDatabaseController());
         transactions.setAssociatedFragment(this);
+        transactions.setRetrievalField("guestID");
         dataListView = null;
     }
 

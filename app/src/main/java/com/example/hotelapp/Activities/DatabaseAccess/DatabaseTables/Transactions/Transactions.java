@@ -25,7 +25,7 @@ public class Transactions extends DatabaseTable {
 
     @Override
     public String getPrimaryKey() {
-        return "guestID";
+        return "transactionID";
     }
 
     @Override

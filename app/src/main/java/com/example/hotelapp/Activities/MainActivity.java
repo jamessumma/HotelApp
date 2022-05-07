@@ -1,5 +1,7 @@
 package com.example.hotelapp.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
 import com.example.hotelapp.Activities.Fragments.ExtrasFragment;
 import com.example.hotelapp.Activities.Fragments.ManageAccountFragment;
 import com.example.hotelapp.Activities.Fragments.ManageBookingsFragment;
@@ -30,17 +33,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle resourceBundle) {
+        this.setContentView(R.layout.main_activity);
         super.onCreate(resourceBundle);
         this.setAttributes();
         this.setHandlers();
-        this.setContentView(R.layout.main_activity);
+
+        this.getSupportActionBar().hide();
 
         ViewPager pager = this.findViewById(R.id.view_pager);
+
         TabLayout tableLayout = this.findViewById(R.id.tab_layout);
 
         List<Fragment> fragments = Arrays.asList(manageAccountFragment,purchasesFragment,extrasFragment,manageBookingsFragment);
 
-        List<String> titles = Arrays.asList("Manage Account","Purchases","Extras","Manage Bookings");
+        List<String> titles = Arrays.asList("Manage Account","Purchase\nHistory","Extras","Manage Bookings");
 
         this.fragmentPager = new FragmentPager(pager,this.getSupportFragmentManager(),fragments,titles);
 
@@ -67,20 +73,23 @@ public class MainActivity extends AppCompatActivity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //TODO add some stuff
+                            HotelLoginValidation.setUserId("");
+                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                            MainActivity.this.startActivity(intent);
                         }
                     }
             );
         }
     }
+
     private void setHandlers(){
         this.setLogoutHandler();
         this.setCheckInCheckOutHandler();
     }
 
     private void setAttributes() {
-        this.logoutBtn = this.findViewById(R.id.logout_btn);
-        this.checkInCheckOutBtn = this.findViewById(R.id.check_in_checkout_btn);
+        this.logoutBtn = findViewById(R.id.logout_btn);
+        this.checkInCheckOutBtn = findViewById(R.id.check_in_checkout_btn);
         this.manageAccountFragment = new ManageAccountFragment();
         this.purchasesFragment = new PurchasesFragment();
         this.manageBookingsFragment = new ManageBookingsFragment();

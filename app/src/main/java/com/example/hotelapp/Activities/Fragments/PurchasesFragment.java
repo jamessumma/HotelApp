@@ -10,11 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Products.Product;
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Products.Products;
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.Transaction;
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.TransactionItem;
-import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.TransactionItems;
 import com.example.hotelapp.Activities.DatabaseAccess.DatabaseTables.Transactions.Transactions;
 import com.example.hotelapp.Activities.DatabaseAccess.HotelLoginValidation;
 import com.example.hotelapp.R;
@@ -22,7 +18,7 @@ import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseAccess.Databa
 import com.example.myandroidsupportlibrary.DatabaseSupport.DatabaseTable.DatabaseTableRecord;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataItemToView;
 import com.example.myandroidsupportlibrary.FragmentSupport.DynamicComponents.DataListView.DataListView;
-import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment;
+import com.example.myandroidsupportlibrary.FragmentSupport.DynamicFragment.DynamicFragment;
 
 public class PurchasesFragment extends DynamicFragment {
 
@@ -34,6 +30,7 @@ public class PurchasesFragment extends DynamicFragment {
         super();
         this.transactions = new Transactions(DatabaseTask.getDatabaseController());
         transactions.setAssociatedFragment(this);
+        transactions.setRetrievalField("guestID");
         dataListView = null;
     }
 

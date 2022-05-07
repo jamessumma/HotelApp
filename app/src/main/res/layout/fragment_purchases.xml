@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/purchaseHistoryRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="525dp"
+        android:layout_marginTop="40dp"/>
 
 </LinearLayout>
